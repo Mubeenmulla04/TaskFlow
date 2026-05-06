@@ -2,12 +2,25 @@
   "name": "taskflow-fullstack",
   "version": "1.0.0",
   "description": "TaskFlow - Team Task Manager",
+  "type": "module",
   "scripts": {
     "install-all": "npm install --prefix server && npm install --prefix frontend",
     "dev:server": "npm run dev --prefix server",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:frontend\"",
     "build": "npm run build --prefix frontend"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "express-rate-limit": "^7.1.5",
+    "mongoose": "^8.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "socket.io": "^4.7.2"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
