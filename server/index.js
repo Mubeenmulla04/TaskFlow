@@ -18,8 +18,10 @@ dotenv.config();
 const app = express();
 const httpServer = createServer(app);
 
-// Initialize Socket.io
-initIO(httpServer);
+// Initialize Socket.io (Only if not on Vercel - WebSockets are not supported on Vercel Serverless)
+if (!process.env.VERCEL) {
+  initIO(httpServer);
+}
 
 // Connect DB
 connectDB();
@@ -65,9 +67,13 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-httpServer.listen(PORT, () => {
-  console.log(`\n🚀 TaskFlow Server running on port ${PORT}`);
-  console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}\n`);
-});
+
+// Only listen if not on Vercel (Vercel handles the server start)
+if (!process.env.VERCEL) {
+  httpServer.listen(PORT, () => {
+    console.log(`\n🚀 TaskFlow Server running on port ${PORT}`);
+    console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}\n`);
+  });
+}
 
 export default app;
