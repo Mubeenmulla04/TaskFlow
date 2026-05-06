@@ -24,7 +24,12 @@ if (!process.env.VERCEL) {
 }
 
 // Connect DB
-connectDB();
+console.log('Connecting to MongoDB...');
+connectDB().then(() => {
+  console.log('MongoDB connection initialized');
+}).catch(err => {
+  console.error('MongoDB connection failed:', err.message);
+});
 
 // Security Middleware
 app.use(helmet({ crossOriginEmbedderPolicy: false }));
