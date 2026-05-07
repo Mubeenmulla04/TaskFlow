@@ -28,7 +28,11 @@ export const initIO = (httpServer) => {
 
 export const getIO = () => {
   if (!io) {
-    throw new Error('Socket.io not initialized!');
+    // Return a dummy object for serverless environments (Vercel)
+    return {
+      emit: () => {},
+      to: () => ({ emit: () => {} }),
+    };
   }
   return io;
 };

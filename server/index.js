@@ -16,6 +16,7 @@ import { errorHandler, notFound } from './middleware/error.middleware.js';
 dotenv.config();
 
 const app = express();
+app.set('trust proxy', 1);
 const httpServer = createServer(app);
 
 // Initialize Socket.io (Only if not on Vercel - WebSockets are not supported on Vercel Serverless)
